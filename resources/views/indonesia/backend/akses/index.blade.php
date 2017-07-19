@@ -12,7 +12,7 @@
                             <h2 class="panel-title"><b>HAK AKSES WEBSITE SMK ASSALAAM</b></h2>
                             </div>
                             <div class="col-md-2">
-                            <a href="" class="btn btn-primary">Tambah Akun</a>
+                            <a href="{{ url('/admin/hak-akses/create') }}" class="btn btn-primary">Tambah Akun</a>
                             </div>
 
                         </div>
@@ -39,12 +39,12 @@
                         <td><center>{{ $a->name }}</center></td>
                         <td><center>{{ $a->email }}</center></td>
                         @if($a->id != 1)
-                        <td><center><a href="" class="btn btn-warning btn-xs">Ubah</a></center></td>
-                        <td><center><a href="" class="btn btn-danger btn-xs">Hapus</a></center></td>
+                        <td><center><a href="{{ route('hak-akses.edit',$a->id) }}" class="btn btn-warning btn-xs">Ubah</a></center></td>
+                        <td><center><a href="{{ route('hak-akses.destroy',$a->id) }}" class="btn btn-danger btn-xs">Hapus</a></center></td>
                         @endif 
                         @if($a->id == 1)
-                        <td><center><a href="" class="btn btn-warning btn-xs">Ubah</a></center></td>
-                        <td><center><a href="" class="btn btn-default btn-xs">Hapus</a></center></td>
+                        <td><center><a href="{{ route('hak-akses.edit',$a->id) }}" class="btn btn-warning btn-xs">Ubah</a></center></td>
+                        <td><center><a href="{{ route('hak-akses.destroy',$a->id) }}" class="btn btn-default btn-xs">Hapus</a></center></td>
                         @endif 
                     </tr>
                     @php

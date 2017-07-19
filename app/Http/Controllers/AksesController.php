@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 use App\User;
 use Yajra\Datatables\Html\Builder;
 use Yajra\Datatables\Facades\Datatables;
+use App\Http\Requests\StoreMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
+use Illuminate\Support\Facades\Session;
 
 class AksesController extends Controller
 {
@@ -36,9 +40,23 @@ class AksesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMemberRequest $request)
     {
-        //
+        $password = str_random(6);
+        $data = $request->all();
+        $data['password']=bcrypt($password);
+        $data['is_verified']=1;
+        $member = User::create($data);
+
+        $memberRole = Role::where('name',$data['role'])->first();
+        $member->attachRole($memberRole);
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Menyimpan Member Dengan Email "."<strong>".$data['email']."</strong>".
+            " Dan Password <strong>".$password."</strong>"
+        ]);
+        return redirect()->route('hak-akses.index');
     }
 
     /**
@@ -60,7 +78,8 @@ class AksesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $member=User::find($id);
+        return view('indonesia.backend.akses.edit')->with(compact('member'));
     }
 
     /**
@@ -70,9 +89,15 @@ class AksesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMemberRequest $request, $id)
     {
-        //
+        $member=User::find($id);
+        $member->update($request->only('name','email'));
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Menyimpan $member->name"
+        ]);
+        return redirect()->route('hak-akses.index');
     }
 
     /**

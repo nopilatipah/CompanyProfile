@@ -28,6 +28,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','role:admin']], function()
 	Route::resource('artikel','ArtikelController');
 });
 
+Route::group(['prefix'=>'author-artikel','middleware'=>['auth','role:artikel']], function(){
+	Route::resource('artikel','ArtikelController');
+});
+
 Route::get('akun/profile','AkunController@profile');
 Route::get('akun/profile/edit','AkunController@editProfile');
 Route::post('akun/profile','AkunController@updateProfile');

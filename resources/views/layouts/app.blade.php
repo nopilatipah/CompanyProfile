@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('table/css/jquery.dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('table/css/dataTables.bootstrap.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/selectize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/selectize.bootstrap3.css') }}">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -89,7 +92,7 @@
                             <li><a href="">Teknik Kendaraan Ringan</a></li>
                         </ul>
                         </li>
-                        <li><a href="">Akun</a></li>
+                        <li><a href="{{ url('akun/profile') }}">Akun</a></li>
                         <li><a class="btn" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >LOGOUT</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -105,7 +108,7 @@
                             <li><a href="">Ruang Praktek</a></li>
                         </ul>
                         </li>
-                        <li><a href="">Akun</a></li>
+                        <li><a href="{{ url('akun/profile') }}">Akun</a></li>
                         <li><a class="btn" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >LOGOUT</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -113,8 +116,8 @@
                     @endrole
                     @role('artikel')
                         <li><a href="">Beranda</a></li>
-                        <li><a href="">Berita</a></li>
-                        <li><a href="">Akun</a></li>
+                        <li><a href="{{ route('artikel.index') }}">Berita</a></li>
+                        <li><a href="{{ url('akun/profile') }}">Akun</a></li>
                         <li><a class="btn" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >LOGOUT</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
@@ -234,6 +237,8 @@
     <script src="{{ asset('assets/js/headroom.min.js') }}"></script>
     <script src="{{ asset('assets/js/jQuery.headroom.min.js') }}"></script>
     <script src="{{ asset('assets/js/template.js') }}"></script>
+    <script src="{{ asset('js/selectize.min.js') }}"></script>
+    <script src="/js/custom.js"></script>
     @yield('scripts')
 </body>
 </html>

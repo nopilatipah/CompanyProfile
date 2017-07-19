@@ -43,7 +43,7 @@ class AkunController extends Controller
     }
     public function editPassword()
     {
-        return view('indonesia.backend.akun.password');
+        return view('indonesia.backend.akun.edit-password');
     }
     public function updatePassword(Request $request)
     {
@@ -61,6 +61,6 @@ class AkunController extends Controller
         Session::flash("flash_notification", [
             "level"=>"success",
             "message"=>"Password Berhasil Diubah"]);
-        return redirect('akun/password');
+        return redirect('akun/profile');
     }
 }
