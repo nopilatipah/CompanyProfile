@@ -23,7 +23,7 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+        return view('indonesia.backend.artikel.create');
     }
 
     /**
